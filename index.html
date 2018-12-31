@@ -311,6 +311,17 @@
     "lastName": "&lt;your last name&gt;"
 }'</span>
 </code></pre>
+<blockquote>
+<p>The above command returns a 201 status code and a JSON object containing the user information like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c2a84e2ddca060017e13899"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"lastName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tester"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"userName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testuser"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"strains"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtain a token, you must have an account. To create an account, you can either register from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the <code>users</code> endpoint.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST https://medicine-cabinet.herokuapp.com/users</code></p>
@@ -338,8 +349,6 @@
 <td>your last name</td>
 </tr>
 </tbody></table>
-
-<p>A successful request will return a 201 status code.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To obtain a token, use this code:</p>
@@ -352,6 +361,13 @@
     "password": "&lt;your password&gt;"
 }'</span>
 </code></pre>
+<blockquote>
+<p>The above command returns a 200 status code and a JSON object containing a token like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"authToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;token&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>Once you have an account, you must either login from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the <code>auth/login</code> endpoint in order to obtain a token.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>https://medicine-cabinet.herokuapp.com/auth/login</code></p>
@@ -372,7 +388,7 @@
 </tr>
 </tbody></table>
 
-<p>A successful request will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:</p>
+<p>The returned token must be added in the header of any request to a protected endpoint via Bearer Authentication. The header should look as follows:</p>
 
 <p><code>Authorization: Bearer &lt;token&gt;</code></p>
 
@@ -387,7 +403,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
   https://medicine-cabinet.herokuapp.com/strains
 </code></pre>
 <blockquote>
-<p>The above command returns a 200 status code and a JSON object containing an array of all existing strains. The return data would be structured like this:</p>
+<p>The above command returns a 200 status code and a JSON object containing an array of all existing strains like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"strains"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -418,7 +434,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
   https://medicine-cabinet.herokuapp.com/strains/&lt;id&gt;
 </code></pre>
 <blockquote>
-<p>The above command returns a 200 status code and a JSON object structured like this:</p>
+<p>The above command returns a 200 status code and a JSON object containing specific strain information like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c1151437a2d9625e08a7c8c"</span><span class="p">,</span><span class="w">
@@ -462,7 +478,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 }'</span>
 </code></pre>
 <blockquote>
-<p>The above command returns a 201 status code and a JSON object structured like this:</p>
+<p>The above command returns a 201 status code and a JSON object containing the strain information like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c2a3758d1490900174e9da8"</span><span class="p">,</span><span class="w">
@@ -519,7 +535,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 }'</span>
 </code></pre>
 <blockquote>
-<p>The above command returns a 200 status code and a JSON object structured like this:</p>
+<p>The above command returns a 200 status code and a JSON object containing the updated data like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5c2a3758d1490900174e9da8"</span><span class="p">,</span><span class="w">
@@ -714,7 +730,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 
 </code></pre>
 <blockquote>
-<p>The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id. The return data would be structured like this:</p>
+<p>The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"strains"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
