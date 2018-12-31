@@ -17,7 +17,7 @@ search: true
 
 # Introduction
 
-Welcome to the Medicine Cabinet API! You can use our API to access Medicine Cabinet API endpoints, which can interact with our database of medicinal cannabis strains, as well as manage your digital medicine cabinet.
+TEST Welcome to the Medicine Cabinet API! You can use our API to access Medicine Cabinet API endpoints, which can interact with our database of medicinal cannabis strains, as well as manage your digital medicine cabinet.
 
 # Registration
 > To register with Medicine Cabinet, use this code:
