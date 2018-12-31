@@ -33,6 +33,18 @@ curl -X POST
 	"lastName": "<your last name>"
 }'
 ```
+
+> The above command returns a 201 status code and a JSON object containing the user information like this:
+
+```json
+{
+    "_id": "5c2a84e2ddca060017e13899",
+    "firstName": "test",
+    "lastName": "tester",
+    "userName": "testuser",
+    "strains": []
+}
+```
 Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtain a token, you must have an account. To create an account, you can either register from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the `users` endpoint.
 
 ### HTTP Request
@@ -47,8 +59,6 @@ password | desired password
 firstName | your first name
 lastName | your last name
 
-A successful request will return a 201 status code.
-
 # Authentication
 
 > To obtain a token, use this code:
@@ -62,6 +72,14 @@ curl -X POST
 	"password": "<your password>"
 }'
 ```
+> The above command returns a 200 status code and a JSON object containing a token like this:
+
+```json
+{
+    "authToken": "<token>"
+}
+```
+
 Once you have an account, you must either login from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the `auth/login` endpoint in order to obtain a token.
 
 ### HTTP Request
@@ -74,15 +92,13 @@ Field | Description
 userName | your username
 password | your password
 
-A successful request will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:
+The returned token must be added in the header of any request to a protected endpoint via Bearer Authentication. The header should look as follows:
 
 `Authorization: Bearer <token>`
 
 <aside class="notice">
 You must replace <code>&lt;token&gt;</code> with your token.
 </aside>
-
-
 
 
 # Strains
@@ -96,7 +112,7 @@ curl -X GET
   https://medicine-cabinet.herokuapp.com/strains
 ```
 
-> The above command returns a 200 status code and a JSON object containing an array of all existing strains. The return data would be structured like this:
+> The above command returns a 200 status code and a JSON object containing an array of all existing strains like this:
 
 ```json
 {
@@ -134,7 +150,7 @@ curl -X GET
   https://medicine-cabinet.herokuapp.com/strains/<id>
 ```
 
-> The above command returns a 200 status code and a JSON object structured like this:
+> The above command returns a 200 status code and a JSON object containing specific strain information like this:
 
 ```json
 {
@@ -179,7 +195,7 @@ curl -X POST
 }'
 ```
 
-> The above command returns a 201 status code and a JSON object structured like this:
+> The above command returns a 201 status code and a JSON object containing the strain information like this:
 
 ```json
 {
@@ -226,7 +242,7 @@ curl -X PUT
 }'
 ```
 
-> The above command returns a 200 status code and a JSON object structured like this:
+> The above command returns a 200 status code and a JSON object containing the updated data like this:
 
 ```json
 {
@@ -378,7 +394,7 @@ curl -X GET
  
 ```
 
-> The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id. The return data would be structured like this:
+> The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id like this:
 
 ```json
 {
