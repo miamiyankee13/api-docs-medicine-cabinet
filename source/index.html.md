@@ -47,7 +47,7 @@ password | desired password
 firstName | your first name
 lastName | your last name
 
-If successful, you should see a 201 response code.
+A successful request will return a 201 status code.
 
 # Authentication
 
@@ -74,7 +74,7 @@ Field | Description
 userName | your username
 password | your password
 
-If successful, this endpoint will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:
+A successful request will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:
 
 `Authorization: Bearer <token>`
 
