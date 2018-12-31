@@ -134,7 +134,7 @@ curl -X GET
   https://medicine-cabinet.herokuapp.com/strains/<id>
 ```
 
-> The above command returns a JSON object structured like this:
+> The above command returns a 200 status code and a JSON object structured like this:
 
 ```json
 {
@@ -423,7 +423,7 @@ curl -X PUT
   -H 'Authorization: Bearer <token>'
 ```
 
-> The above command returns a JSON object containing a message like this:
+> The above command returns a 200 status code and a JSON object containing a message like this:
 
 ```json
 {
