@@ -62,7 +62,7 @@ curl -X POST
 	"password": "<your password>"
 }'
 ```
-Once you have an account, you must either login from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to this endpoint in order to obtain a token.
+Once you have an account, you must either login from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the `auth/login` endpoint in order to obtain a token.
 
 ### HTTP Request
 
@@ -179,7 +179,7 @@ curl -X POST
 }'
 ```
 
-> The above command returns a JSON object structured like this:
+> The above command returns a 201 status code and a JSON object structured like this:
 
 ```json
 {
@@ -226,7 +226,7 @@ curl -X PUT
 }'
 ```
 
-> The above command returns a JSON object structured like this:
+> The above command returns a 200 status code and a JSON object structured like this:
 
 ```json
 {
@@ -310,7 +310,7 @@ curl -X POST
 }'
 ```
 
-> The above command returns a JSON object containing a message like this:
+> The above command returns a 201 status code and a JSON object containing a message like this:
 
 ```json
 {
@@ -334,7 +334,7 @@ id | id of the strain you would like to add the comment to
 ### Required Fields
 Field | Description
 ----- | -----------
-comment | object containing "content" & "author"
+comment | object containing "content" and "author"
 - content | content of the comment
 - author | author of the comment
 
