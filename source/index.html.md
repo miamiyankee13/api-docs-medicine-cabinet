@@ -3,12 +3,10 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
+
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/miamiyankee13/medicine-cabinet'>View Medicine Cabinet on GitHub</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -19,51 +17,73 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Medicine Cabinet API! You can use our API to access Medicine Cabinet API endpoints, which can interact with our database of medicinal cannabis strains, as well as manage your digital medicine cabinet.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Registration
+> To register with Medicine Cabinet, use this code:
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+```shell
+curl -X POST
+  https://medicine-cabinet.herokuapp.com/users
+  -H 'Content-Type: application/json'
+  -d '{
+	"userName": "<your username>",
+	"password": "<your password>",
+	"firstName": "<your first name>",
+	"lastName": "<your last name>"
+}'
+```
+Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtain a token, you must have an account. To create an account, you can either register from the client side or make a POST request to the `users` endpoint.
+
+### HTTP Request
+
+`POST https://medicine-cabinet.herokuapp.com/users`
+
+### Required Fields
+Field | Description
+----- | -----------
+userName | Your desired username
+password | Your desired password
+firstName | Your first name
+lastName | Your last name
+
+If successful, you should see a 201 response code.
 
 # Authentication
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> To obtain a token, use this code:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl -X POST 
+  https://medicine-cabinet.herokuapp.com/auth/login
+  -H 'Content-Type: application/json'
+  -d '{
+	"userName": "<your username>",
+	"password": "<your password>"
+}'
 ```
+Once you have an account, you must make a POST request to this endpoint in order to obtain a token.
 
-```javascript
-const kittn = require('kittn');
+### HTTP Request
 
-let api = kittn.authorize('meowmeowmeow');
-```
+`https://medicine-cabinet.herokuapp.com/auth/login`
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### Required Fields
+Field | Description
+----- | -----------
+userName | Your username
+password | Your password
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+If successful, this endpoint will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+`Authorization: Bearer <token>`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>&lt;token&gt;</code> with your token.
 </aside>
+
+
+
 
 # Kittens
 
