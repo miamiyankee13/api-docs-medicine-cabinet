@@ -33,7 +33,7 @@ curl -X POST
 	"lastName": "<your last name>"
 }'
 ```
-Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtain a token, you must have an account. To create an account, you can either register from the client side or make a POST request to the `users` endpoint.
+Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtain a token, you must have an account. To create an account, you can either register from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to the `users` endpoint.
 
 ### HTTP Request
 
@@ -42,10 +42,10 @@ Medicine Cabinet uses JSON Web Token (JWT) to conrol access to the API. To obtai
 ### Required Fields
 Field | Description
 ----- | -----------
-userName | Your desired username
-password | Your desired password
-firstName | Your first name
-lastName | Your last name
+userName | desired username
+password | desired password
+firstName | your first name
+lastName | your last name
 
 If successful, you should see a 201 response code.
 
@@ -62,7 +62,7 @@ curl -X POST
 	"password": "<your password>"
 }'
 ```
-Once you have an account, you must make a POST request to this endpoint in order to obtain a token.
+Once you have an account, you must either login from the <a href='https://medicine-cabinet.herokuapp.com/'>client</a> or make a POST request to this endpoint in order to obtain a token.
 
 ### HTTP Request
 
@@ -71,8 +71,8 @@ Once you have an account, you must make a POST request to this endpoint in order
 ### Required Fields
 Field | Description
 ----- | -----------
-userName | Your username
-password | Your password
+userName | your username
+password | your password
 
 If successful, this endpoint will return a 7 day expiry token. This token must be added in the header of any requests to protected endpoints via Bearer Authentication. The header should look as follows:
 
@@ -85,175 +85,388 @@ You must replace <code>&lt;token&gt;</code> with your token.
 
 
 
-# Kittens
+# Strains
 
-## Get All Kittens
+## Get All Strains
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+> To retrieve all strains, use this code:
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl -X GET 
+  https://medicine-cabinet.herokuapp.com/strains
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> The above command returns a 200 status code and a JSON object containing an array of all existing strains. The return data would be structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "strains": [
+    {
+      "_id": "5c1151437a2d9625e08a7c8c",
+      "name": "A-Dub",
+      "type": "Hybrid",
+      "description": "A cross between Sour Double & Alien Dawg",
+      "flavor": "Earthy",
+      "comments": []
+    },
+    {
+      ...next strain
+    }
+  ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint retrieves all existing strains from the database.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This endpoint is NOT protected, therefore does not require a token. 
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://medicine-cabinet.herokuapp.com/strains`
+
+
+## Get a Specific Strain
+
+> To retrieve a specific strain, use this code:
+
+```shell
+curl -X GET
+  https://medicine-cabinet.herokuapp.com/strains/<id>
+```
+
+> The above command returns a JSON object structured like this:
+
+```json
+{
+  "_id": "5c1151437a2d9625e08a7c8c",
+  "name": "A-Dub",
+  "type": "Hybrid",
+  "description": "A cross between Sour Double & Alien Dawg",
+  "flavor": "Earthy",
+  "comments": []
+}
+```
+
+This endpoint retrieves a specific strain from the database.
+
+This endpoint is NOT protected, therefore does not require a token. 
+
+
+### HTTP Request
+
+`GET https://medicine-cabinet.herokuapp.com/strains/<id>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+id | id of the strain to retrieve
 
-## Delete a Specific Kitten
+## Create a Strain
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+> To create a strain, use this code:
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+curl -X POST
+  https://medicine-cabinet.herokuapp.com/strains/
+  -H 'Authorization: Bearer <token>'
+  -H 'Content-Type: application/json'
+  -d '{
+	"name": "New Strain",
+	"type": "Hybrid",
+	"description": "A very new strain",
+	"flavor": "Sweet"
+}'
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> The above command returns a JSON object structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "_id": "5c2a3758d1490900174e9da8",
+    "name": "New Strain",
+    "type": "Hybrid",
+    "description": "A very new strain",
+    "flavor": "Sweet",
+    "comments": []
 }
 ```
 
-This endpoint deletes a specific kitten.
+This endpoint creates a new strain, adding it to the database.
+
+This endpoint IS protected, therefore requires a token.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`POST https://medicine-cabinet.herokuapp.com/strains/`
+
+### Required Fields
+Field | Description
+----- | -----------
+name | name of strain
+type | type of strain
+description | description of strain
+flavor | flavor of strain
+
+## Update a Specific Strain
+
+> To update a strain, use this code:
+
+```shell
+curl -X PUT
+  https://medicine-cabinet.herokuapp.com/strains/<id>
+  -H 'Authorization: Bearer <token>'
+  -H 'Content-Type: application/json'
+  -d '{
+	"_id": "5c2a3758d1490900174e9da8",
+	"name": "Old Strain",
+	"type": "Indica",
+	"description": "This strain is somewhat older now",
+	"flavor": "Sweet"
+}'
+```
+
+> The above command returns a JSON object structured like this:
+
+```json
+{
+    "_id": "5c2a3758d1490900174e9da8",
+    "name": "Old Strain",
+    "type": "Indica",
+    "description": "This strain is somewhat older now",
+    "flavor": "Sweet",
+    "comments": []
+}
+```
+
+This endpoint updates an exisintg strain in the database.
+
+This endpoint IS protected, therefore requires a token.
+
+### HTTP Request
+
+`PUT https://medicine-cabinet.herokuapp.com/strains/<id>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to delete
+id | id of the strain to update
 
+### Required Fields
+Field | Description
+----- | -----------
+_id | id of strain to update
+
+### Optional Fields
+Field | Description
+----- | -----------
+name | updated name of strain
+type | updated type of strain
+description | updated description of strain
+flavor | updated flavor of strain
+
+
+## Delete a Specific Strain
+
+> To delete a strain, use this code:
+
+```shell
+curl -X DELETE
+  https://medicine-cabinet.herokuapp.com/strains/<id>
+  -H 'Authorization: Bearer <token>'
+```
+
+> The above command returns a 204 status code.
+
+This endpoint deletes an existing strain from the database.
+
+This endpoint IS protected, therefore requires a token.
+
+### HTTP Request
+
+`DELETE https://medicine-cabinet.herokuapp.com/strains/<id>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | id of the strain to delete
+
+## Add Strain Comment 
+
+> To add a comment to a strain, use this code:
+
+```shell
+curl -X POST
+  https://medicine-cabinet.herokuapp.com/strains/<id>
+  -H 'Authorization: Bearer <token>'
+  -H 'Content-Type: application/json'
+  -d '{
+	"comment": {
+		"content": "This is a test comment",
+		"author": "testuser"
+	}
+}'
+```
+
+> The above command returns a JSON object containing a message like this:
+
+```json
+{
+    "message": "Comment added to strain"
+}
+```
+
+This endpoint adds a comment to an existing strain in the database.
+
+This endpoint IS protected, therefore requires a token.
+
+### HTTP Request
+
+`POST https://medicine-cabinet.herokuapp.com/strains/<id>`
+
+### URL Parameters
+Parameter | Description
+--------- | -----------
+id | id of the strain you would like to add the comment to
+
+### Required Fields
+Field | Description
+----- | -----------
+comment | object containing "content" & "author"
+- content | content of the comment
+- author | author of the comment
+
+
+## Remove Strain Comment
+
+> To remove a comment from a strain, use this code:
+
+```shell
+curl -X DELETE 
+  https://medicine-cabinet.herokuapp.com/strains/<id>/<commentid>
+  -H 'Authorization: Bearer <token>' 
+```
+
+> The above command returns a 204 status code.
+
+This endpoint removes an existing comment from an existing strain in the database.
+
+This endpoint IS protected, therefore requires a token.
+
+### HTTP Request
+
+`DELETE https://medicine-cabinet.herokuapp.com/strains/<id>/<commentid>`
+
+### URL Parameters
+Parameter | Description
+--------- | -----------
+id | id of the strain to remove the comment from
+commentid | id of the comment to remove
+
+# Users
+
+## Get All User Strains
+
+> To retrieve all user strains from your cabinet, use this code:
+
+```shell
+curl -X GET
+  https://medicine-cabinet.herokuapp.com/users/strains/
+  -H 'Authorization: Bearer <token>'
+ 
+```
+
+> The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id. The return data would be structured like this:
+
+```json
+{
+    "strains": [
+        {
+            "_id": "5c1151437a2d9625e08a7c92",
+            "name": "Blueberry",
+            "type": "Indica",
+            "description": "2000 High Times Cannabis Cup Winner for Best Indica",
+            "flavor": "Blueberry",
+            "comments": [
+                {
+                    "_id": "5c1fd48fd251bc001769435f",
+                    "content": "This strain is perfect for anyone who is trying to relax and wind down after a long day. Tastes great too!",
+                    "author": "miamiyankee13"
+                }
+            ]
+        },
+        {
+          ...next strain
+        }
+    ],
+    "_id": "5c297938214f280017250552"
+}
+```
+
+This endpoint retrieves all existing strains from your cabinet.
+
+This endpoint IS protected, therefore does not require a token. 
+
+### HTTP Request
+
+`GET https://medicine-cabinet.herokuapp.com/users/strains/`
+
+## Add a User Strain
+
+> To add a strain to your cabinet, use this code:
+
+```shell
+curl -X PUT 
+  https://medicine-cabinet.herokuapp.com/users/strains/<id>
+  -H 'Authorization: Bearer <token>'
+```
+
+> The above command returns a JSON object containing a message like this:
+
+```json
+{
+    "message": "Strain added to user"
+}
+```
+
+This endpoint adds an existing strain to your cabinet.
+
+This endpoint IS protected, therefore does not require a token. 
+
+### HTTP Request
+
+`PUT https://medicine-cabinet.herokuapp.com/users/strains/<id>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | id of the strain to add
+
+## Delete a User Strain
+
+> To remove a strain from your cabinet, use this code:
+
+```shell
+curl -X DELETE 
+  https://medicine-cabinet.herokuapp.com/users/strains/<id>
+  -H 'Authorization: Bearer <token>'
+```
+
+> The above command returns a 204 status code.
+
+This endpoint removes an existing strain from your cabinet.
+
+This endpoint IS protected, therefore does not require a token. 
+
+### HTTP Request
+
+`DELETE https://medicine-cabinet.herokuapp.com/users/strains/<id>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | id of the strain to remove
