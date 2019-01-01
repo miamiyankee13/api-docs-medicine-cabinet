@@ -265,7 +265,7 @@
                     <a href="#add-strain-comment" class="toc-h2 toc-link" data-title="Add Strain Comment">Add Strain Comment</a>
                   </li>
                   <li>
-                    <a href="#remove-strain-comment" class="toc-h2 toc-link" data-title="Remove Strain Comment">Remove Strain Comment</a>
+                    <a href="#delete-strain-comment" class="toc-h2 toc-link" data-title="Delete Strain Comment">Delete Strain Comment</a>
                   </li>
               </ul>
           </li>
@@ -273,13 +273,13 @@
             <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-user-strains" class="toc-h2 toc-link" data-title="Get All User Strains">Get All User Strains</a>
+                    <a href="#get-all-cabinet-strains" class="toc-h2 toc-link" data-title="Get All Cabinet Strains">Get All Cabinet Strains</a>
                   </li>
                   <li>
-                    <a href="#add-a-user-strain" class="toc-h2 toc-link" data-title="Add a User Strain">Add a User Strain</a>
+                    <a href="#add-a-cabinet-strain" class="toc-h2 toc-link" data-title="Add a Cabinet Strain">Add a Cabinet Strain</a>
                   </li>
                   <li>
-                    <a href="#delete-a-user-strain" class="toc-h2 toc-link" data-title="Delete a User Strain">Delete a User Strain</a>
+                    <a href="#delete-a-cabinet-strain" class="toc-h2 toc-link" data-title="Delete a Cabinet Strain">Delete a Cabinet Strain</a>
                   </li>
               </ul>
           </li>
@@ -687,7 +687,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 <td>author of the comment</td>
 </tr>
 </tbody></table>
-<h2 id='remove-strain-comment'>Remove Strain Comment</h2>
+<h2 id='delete-strain-comment'>Delete Strain Comment</h2>
 <blockquote>
 <p>To remove a comment from a strain, use this code:</p>
 </blockquote>
@@ -720,9 +720,9 @@ You must replace <code>&lt;token&gt;</code> with your token.
 <td>id of the comment to remove</td>
 </tr>
 </tbody></table>
-<h1 id='users'>Users</h1><h2 id='get-all-user-strains'>Get All User Strains</h2>
+<h1 id='users'>Users</h1><h2 id='get-all-cabinet-strains'>Get All Cabinet Strains</h2>
 <blockquote>
-<p>To retrieve all user strains from your cabinet, use this code:</p>
+<p>To retrieve all strains from your cabinet, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET
   https://medicine-cabinet.herokuapp.com/users/strains/
@@ -730,7 +730,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 
 </code></pre>
 <blockquote>
-<p>The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id like this:</p>
+<p>The above command returns a 200 status code, as well as a JSON object containing an array of all existing cabinet strains and the user id like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"strains"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -760,7 +760,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 <p>This endpoint IS protected, therefore does not require a token. </p>
 <h3 id='http-request-10'>HTTP Request</h3>
 <p><code>GET https://medicine-cabinet.herokuapp.com/users/strains/</code></p>
-<h2 id='add-a-user-strain'>Add a User Strain</h2>
+<h2 id='add-a-cabinet-strain'>Add a Cabinet Strain</h2>
 <blockquote>
 <p>To add a strain to your cabinet, use this code:</p>
 </blockquote>
@@ -792,7 +792,7 @@ You must replace <code>&lt;token&gt;</code> with your token.
 <td>id of the strain to add</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-user-strain'>Delete a User Strain</h2>
+<h2 id='delete-a-cabinet-strain'>Delete a Cabinet Strain</h2>
 <blockquote>
 <p>To remove a strain from your cabinet, use this code:</p>
 </blockquote>
