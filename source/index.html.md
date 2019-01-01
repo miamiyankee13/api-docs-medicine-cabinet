@@ -355,7 +355,7 @@ comment | object containing "content" and "author"
 - author | author of the comment
 
 
-## Remove Strain Comment
+## Delete Strain Comment
 
 > To remove a comment from a strain, use this code:
 
@@ -383,9 +383,9 @@ commentid | id of the comment to remove
 
 # Users
 
-## Get All User Strains
+## Get All Cabinet Strains
 
-> To retrieve all user strains from your cabinet, use this code:
+> To retrieve all strains from your cabinet, use this code:
 
 ```shell
 curl -X GET
@@ -394,7 +394,7 @@ curl -X GET
  
 ```
 
-> The above command returns a 200 status code, as well as a JSON object containing an array of all existing user strains and the user id like this:
+> The above command returns a 200 status code, as well as a JSON object containing an array of all existing cabinet strains and the user id like this:
 
 ```json
 {
@@ -429,7 +429,7 @@ This endpoint IS protected, therefore does not require a token.
 
 `GET https://medicine-cabinet.herokuapp.com/users/strains/`
 
-## Add a User Strain
+## Add a Cabinet Strain
 
 > To add a strain to your cabinet, use this code:
 
@@ -461,7 +461,7 @@ Parameter | Description
 --------- | -----------
 id | id of the strain to add
 
-## Delete a User Strain
+## Delete a Cabinet Strain
 
 > To remove a strain from your cabinet, use this code:
 
