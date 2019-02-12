@@ -423,7 +423,7 @@ curl -X GET
 
 This endpoint retrieves all existing strains from your cabinet.
 
-This endpoint IS protected, therefore does not require a token. 
+This endpoint IS protected, therefore requires a token. 
 
 ### HTTP Request
 
