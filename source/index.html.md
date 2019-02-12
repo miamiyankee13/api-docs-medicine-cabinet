@@ -449,7 +449,7 @@ curl -X PUT
 
 This endpoint adds an existing strain to your cabinet.
 
-This endpoint IS protected, therefore does not require a token. 
+This endpoint IS protected, therefore requires a token. 
 
 ### HTTP Request
 
@@ -475,7 +475,7 @@ curl -X DELETE
 
 This endpoint removes an existing strain from your cabinet.
 
-This endpoint IS protected, therefore does not require a token. 
+This endpoint IS protected, therefore requires a token. 
 
 ### HTTP Request
 
